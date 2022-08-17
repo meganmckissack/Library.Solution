@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Library.Solution.Models;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Library.Solution.Controllers
+namespace Library.Controllers
 {
     public class HomeController : Controller
     {
@@ -19,4 +12,3 @@ namespace Library.Solution.Controllers
       }
     }
 }
-
