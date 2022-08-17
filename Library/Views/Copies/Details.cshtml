@@ -1,0 +1,43 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Copy
+
+<h1>Copy Details</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Copy Id
+      </th>
+      <th>
+        Book
+      </th>
+      <th>
+        Author
+      </th>
+      <th>
+        Checked Out
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        @Html.DisplayFor(model => model.CopyId)
+      </td>
+      <td>
+        @* @foreach(var join in Model.JoinArtistCopy)
+          {
+            <li>@join.Artist.ArtistName</li>
+          } *@
+      </td>
+      <td>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CopyId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.CopyId })
+      </td>
+    </tr>
+  </tbody>
+</table>
