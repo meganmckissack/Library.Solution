@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@using System.Collections.Generic;
+@using Library.Models;
+@model Library.Models.Book
+
+<h4>Add a new task</h4>
+@using (Html.BeginForm("Create", "Book"))
+{
+  
+
+  @Html.LabelFor(model => model.BookTitle)
+  @Html.TextBoxFor(model => model.BookTitle)
+
+  @* @Html.Label("Select Artist")
+  @Html.DropDownList("ArtistId") *@
+
+
+  <input type="submit" value="Add new Book" />
+}
+<hr />
+<p>@Html.ActionLink("Show all Books", "Index")</p>

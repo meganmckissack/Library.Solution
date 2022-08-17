@@ -1,0 +1,40 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Book
+
+<h1>Book Details</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        Book BookTitle
+      </th>
+      <th>
+        Author
+      </th>
+      <th>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        @Html.DisplayFor(model => model.BookTitle)
+      </td>
+      <td>
+        @* @foreach(var join in Model.JoinArtistBook)
+          {
+            <li>@join.Artist.ArtistName</li>
+          } *@
+      </td>
+      <td>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.BookId }) |
+        @Html.ActionLink("Delete", "Delete", new { id = Model.BookId })
+      </td>
+    </tr>
+  </tbody>
+</table>
