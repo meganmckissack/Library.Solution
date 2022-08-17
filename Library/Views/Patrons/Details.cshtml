@@ -1,0 +1,35 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Library.Models.Patron
+
+<h2>Patron Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.PatronName): @Html.DisplayFor(model => model.PatronName)<h3>
+
+@* <h3>@Html.Label("Gallery"): 
+@foreach(var join in Model.JoinPatronGallery)
+    {
+      <p>@join.Gallery.GalleryName</p>
+    }
+  
+@if(@Model.JoinPatronArtWork.Count == 0)
+{
+  <p>This Patron does not contain any Artworks</p>
+}
+else
+{
+  <h4>Artworks:</h4>
+  <ul>
+  @foreach(var join in Model.JoinPatronArtWork)
+  {
+    <li>@join.Artwork.Title</li>
+  }
+  </ul>
+} *@
+<hr />
+@* <p>@Html.ActionLink("Add Artwork", "Create", "Artworks")</p> *@
+<p>@Html.ActionLink("Edit Patron", "Edit", new { id = Model.PatronId })</p>
+<p>@Html.ActionLink("Delete Patron", "Delete", new { id = Model.PatronId })</p>
+<p>@Html.ActionLink("Back to list", "Index")</p>

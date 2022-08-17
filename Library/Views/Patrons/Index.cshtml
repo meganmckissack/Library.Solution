@@ -1,0 +1,23 @@
+@{
+  Layout = "_Layout";
+} 
+
+@using Library.Models;
+@model List<Library.Models.Patron>;
+
+<h1>Patrons</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3>No Patrons have been added yet!</h3>
+} 
+
+<ul>
+  @foreach(Patron Patron in Model)
+  {
+    <li>@Html.ActionLink($"{Patron.PatronName}", "Details", new { id = Patron.PatronId })</li>
+  }
+</ul>
+<hr />
+<p>@Html.ActionLink("Add new Patron", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
