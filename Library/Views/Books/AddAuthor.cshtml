@@ -2,23 +2,21 @@
   Layout = "_Layout";
 }
 
+@using System.Collections.Generic;
 @model Library.Models.Book
 
-<h2>Edit</h2>
+<h2>Add an Author</h2>
 
-<h4>Edit this Book: @Html.DisplayFor(model => model.BookTitle)</h4>
+<h4>Add an Author to this Book: @Html.DisplayFor(model => model.BookTitle)</h4>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.BookId)
-
-  @Html.LabelFor(model => model.BookTitle)
-  @Html.EditorFor(model => model.BookTitle)
 
   @Html.Label("Select Author")
   @Html.DropDownList("AuthorId")
 
   <input type="submit" value="Save" />
 }
-<hr />
-<p>@Html.ActionLink("Back to list", "Index")</p>
+
+<p>@Html.ActionLink("Back to Book list", "Index")</p>

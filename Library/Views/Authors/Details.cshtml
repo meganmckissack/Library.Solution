@@ -8,28 +8,23 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.AuthorName): @Html.DisplayFor(model => model.AuthorName)<h3>
 
-@* <h3>@Html.Label("Gallery"): 
-@foreach(var join in Model.JoinAuthorGallery)
-    {
-      <p>@join.Gallery.GalleryName</p>
-    }
   
-@if(@Model.JoinAuthorArtWork.Count == 0)
+@if(@Model.JoinAuthorBook.Count == 0)
 {
-  <p>This Author does not contain any Artworks</p>
+  <p>This Author does not contain any Books</p>
 }
 else
 {
-  <h4>Artworks:</h4>
+  <h4>Books:</h4>
   <ul>
-  @foreach(var join in Model.JoinAuthorArtWork)
+  @foreach(var join in Model.JoinAuthorBook)
   {
-    <li>@join.Artwork.Title</li>
+    <li>@join.Book.BookTitle</li>
   }
   </ul>
-} *@
+}
 <hr />
-@* <p>@Html.ActionLink("Add Artwork", "Create", "Artworks")</p> *@
+<p>@Html.ActionLink("Add Book", "Create", "Books")</p>
 <p>@Html.ActionLink("Edit Author", "Edit", new { id = Model.AuthorId })</p>
 <p>@Html.ActionLink("Delete Author", "Delete", new { id = Model.AuthorId })</p>
 <p>@Html.ActionLink("Back to list", "Index")</p>

@@ -7,10 +7,10 @@ namespace Library.Models
     public DbSet<Author> Authors { get; set; }
     public DbSet<AuthorBook> AuthorBook { get; set; }
     public DbSet<Book> Books { get; set; }
-    // public DbSet<Copy> Copies { get; set; }
-    // public DbSet<BookCopy> BookCopies { get; set; }
-    // public DbSet<Patron> Patrons { get; set; }
-    // public DbSet<Checkout> Checkouts { get; set; }
+    public DbSet<Copy> Copies { get; set; }
+    public DbSet<BookCopy> BookCopies { get; set; }
+    public DbSet<Patron> Patrons { get; set; }
+    public DbSet<Checkout> Checkouts { get; set; }
 
 
     public LibraryContext(DbContextOptions options) : base(options) { }

@@ -21,8 +21,7 @@ namespace Library.Controllers
 
     public ActionResult Index()
     {
-      List<Book> model = _db.Books.ToList();
-    return View(model);
+      return View(_db.Books.ToList());
     }
 
     public ActionResult Create()
@@ -75,23 +74,23 @@ namespace Library.Controllers
         return RedirectToAction("Index");
     }
 
-    // public ActionResult AddAuthor(int id)
-    // { 
-    //   var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
-    //   ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "AuthorName");
-    //   return View(thisBook);
-    // }
+    public ActionResult AddAuthor(int id)
+    { 
+      var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
+      ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "AuthorName");
+      return View(thisBook);
+    }
 
-    // [HttpPost]
-    // public ActionResult AddAuthor(Book book, int AuthorId)
-    // {
-    //   if (AuthorId != 0)
-    //   {
-    //     _db.AuthorBook.Add(new AuthorBook() { AuthorId = AuthorId, BookId = book.BookId });
-    //     _db.SaveChanges();
-    //   }
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    public ActionResult AddAuthor(Book book, int AuthorId)
+    {
+      if (AuthorId != 0)
+      {
+        _db.AuthorBook.Add(new AuthorBook() { AuthorId = AuthorId, BookId = book.BookId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
 
 
     public ActionResult Delete(int id)
@@ -109,13 +108,13 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
-    // [HttpPost]
-    // public ActionResult DeleteAuthor(int joinId)
-    // {
-    //   var joinEntry = _db.AuthorBook.FirstOrDefault(entry => entry.AuthorBookId == joinId);
-    //   _db.AuthorBook.Remove(joinEntry);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    public ActionResult DeleteAuthor(int joinId)
+    {
+      var joinEntry = _db.AuthorBook.FirstOrDefault(entry => entry.AuthorBookId == joinId);
+      _db.AuthorBook.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }

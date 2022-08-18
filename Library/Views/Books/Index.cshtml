@@ -35,10 +35,10 @@
           @Html.DisplayFor(modelBook => book.BookTitle)
         </td>
         <td>
-          @* @foreach(var join in Book.JoinArtistBook)
+          @foreach(var join in book.JoinAuthorBook)
           {
-            @join.Artist.ArtistName
-          } *@
+            @join.Author.AuthorName
+          }
         </td>
         <td>
           @* @if (Book.JoinBookGallery.Count == 0)
