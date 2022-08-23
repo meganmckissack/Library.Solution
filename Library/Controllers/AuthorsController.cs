@@ -25,14 +25,22 @@ namespace Library.Controllers
 
     public ActionResult Create()
     {
+      ViewBag.BookId = new SelectList(_db.Books, "BookId", "BookTitle");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Author author)
+    public ActionResult Create(Author author, int BookId)
     {
       _db.Authors.Add(author);
       _db.SaveChanges();
+      if (BookId !=0)
+      {
+        _db.AuthorBook.Add(new AuthorBook() {
+          BookId = BookId, AuthorId = author.AuthorId
+        });
+        _db.SaveChanges();
+      }
       return RedirectToAction("Index");
     }
 
