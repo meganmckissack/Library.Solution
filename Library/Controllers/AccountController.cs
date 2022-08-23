@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
-using ToDoList.Models;
 using System.Threading.Tasks;
+using Library.Models;
 using Library.ViewModels;
 
 namespace Library.Controllers
@@ -32,7 +32,7 @@ namespace Library.Controllers
         [HttpPost]
         public async Task<ActionResult> Register (RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserEmail = model.Email }; //does this have to be UserName?
+            var user = new ApplicationUser { UserName = model.Email }; //does this have to be UserName?/Yes, can't use UserEmail
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {

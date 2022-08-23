@@ -5,6 +5,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 using Library.Models;
 
 
@@ -13,23 +17,28 @@ namespace Library.Controllers
   public class BooksController : Controller
   {
     private readonly LibraryContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public BooksController(LibraryContext db)
+    public BooksController(UserManager<ApplicationUser> userManager, LibraryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
+    [AllowAnonymous]
     public ActionResult Index()
     {
       return View(_db.Books.ToList());
     }
 
+    [Authorize]
     public ActionResult Create()
     {
       ViewBag.AuthorId = new SelectList(_db.Authors, "AuthorId", "AuthorName");
       return View();
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult Create(Book book, int AuthorId)
     {
@@ -45,6 +54,7 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
+    [AllowAnonymous]
     public ActionResult Details(int id)
     {
       var thisBook = _db.Books
@@ -55,6 +65,7 @@ namespace Library.Controllers
       return View(thisBook);
     }
 
+    [Authorize]
     public ActionResult Edit(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
@@ -62,6 +73,7 @@ namespace Library.Controllers
       return View(thisBook);
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult Edit(Book book, int AuthorId)
     {
@@ -74,6 +86,7 @@ namespace Library.Controllers
         return RedirectToAction("Index");
     }
 
+    [Authorize]
     public ActionResult AddAuthor(int id)
     { 
       var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
@@ -81,6 +94,7 @@ namespace Library.Controllers
       return View(thisBook);
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult AddAuthor(Book book, int AuthorId)
     {
@@ -92,13 +106,14 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
-
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisBook = _db.Books.FirstOrDefault(book => book.BookId == id);
       return View(thisBook);
     }
 
+    [Authorize]
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
@@ -108,6 +123,7 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult DeleteAuthor(int joinId)
     {
