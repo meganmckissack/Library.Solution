@@ -32,7 +32,7 @@ namespace Library.Controllers
         [HttpPost]
         public async Task<ActionResult> Register (RegisterViewModel model)
         {
-            var user = new ApplicationUser { UserName = model.Email };
+            var user = new ApplicationUser { UserEmail = model.Email }; //does this have to be UserName?
             IdentityResult result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
@@ -43,5 +43,32 @@ namespace Library.Controllers
                 return View();
             }
         }
+
+  public ActionResult Login()
+  {
+    return View();
+  }
+
+  [HttpPost]
+  public async Task<ActionResult> Login(LoginViewModel model)
+  {
+    Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, isPersistent: true, lockoutOnFailure: false);
+      if (result.Succeeded)
+      {
+        return RedirectToAction("Index");
+      }
+      else
+      {
+        return View();
+      }
     }
+
+    [HttpPost]
+    public async Task<ActionResult> LogOff()
+    {
+      await _signInManager.SignOutAsync();
+      return RedirectToAction("Index");
+    }
+
+  }
 }
