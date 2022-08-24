@@ -25,7 +25,7 @@ namespace Library.Controllers
       _db = db;
     }
 
-    [AllowAnonymous]
+    
     public ActionResult Index()
     {
       return View(_db.Books.ToList());
@@ -38,7 +38,7 @@ namespace Library.Controllers
       return View();
     }
 
-    [Authorize]
+    
     [HttpPost]
     public ActionResult Create(Book book, int AuthorId)
     {
@@ -54,7 +54,7 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
-    [AllowAnonymous]
+    
     public ActionResult Details(int id)
     {
       var thisBook = _db.Books
@@ -73,7 +73,7 @@ namespace Library.Controllers
       return View(thisBook);
     }
 
-    [Authorize]
+
     [HttpPost]
     public ActionResult Edit(Book book, int AuthorId)
     {
@@ -94,7 +94,7 @@ namespace Library.Controllers
       return View(thisBook);
     }
 
-    [Authorize]
+    
     [HttpPost]
     public ActionResult AddAuthor(Book book, int AuthorId)
     {
@@ -113,7 +113,7 @@ namespace Library.Controllers
       return View(thisBook);
     }
 
-    [Authorize]
+    
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
