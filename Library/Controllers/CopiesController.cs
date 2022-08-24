@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 using Library.Models;
 
 namespace Library.Controllers
@@ -11,9 +15,11 @@ namespace Library.Controllers
   public class CopiesController : Controller
   {
     private readonly LibraryContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public CopiesController(LibraryContext db)
+    public CopiesController(UserManager<ApplicationUser> userManager, LibraryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
@@ -22,6 +28,7 @@ namespace Library.Controllers
     return View(_db.Copies.ToList());
     }
 
+    [Authorize]
     public ActionResult Create()
     {
       ViewBag.PatronId = new SelectList(_db.Patrons, "PatronId", "PatronName");
@@ -53,6 +60,7 @@ namespace Library.Controllers
       return View(thisCopy);
     }
 
+    [Authorize]
     public ActionResult Edit(int id)
     {
       var thisCopy = _db.Copies.FirstOrDefault(copy => copy.CopyId == id);
@@ -72,6 +80,7 @@ namespace Library.Controllers
         return RedirectToAction("Index");
     }
 
+    [Authorize]
     public ActionResult AddAuthor(int id)
     { 
       var thisCopy = _db.Copies.FirstOrDefault(copy => copy.CopyId == id);
@@ -90,7 +99,7 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
-
+    [Authorize]
     public ActionResult Delete(int id)
     {
       var thisCopy = _db.Copies.FirstOrDefault(copy => copy.CopyId == id);
@@ -106,6 +115,7 @@ namespace Library.Controllers
       return RedirectToAction("Index");
     }
 
+    [Authorize]
     [HttpPost]
     public ActionResult DeletePatron(int joinId)
     {
